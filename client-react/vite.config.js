@@ -12,12 +12,14 @@ export default defineConfig({
     port: 3001, // Set the port to 3001 (or any other available port)
     proxy: {
       '/api/golang': {
+        // target: 'http://localhost:8080',
         target: 'http://api-golang-container:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/golang/, ''),
         secure: false,
       },
       '/api/node': {
+        // target: 'http://localhost:3000',
         target: 'http://api-node-container:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/node/, ''),
