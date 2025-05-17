@@ -1,5 +1,5 @@
 # Starting with a base image for Node.js
-FROM node:20-bullseye-slim AS build-base
+FROM node:19.6-bullseye-slim AS build-base
 
 # Set the working directory in the container
 WORKDIR /usr/src/app

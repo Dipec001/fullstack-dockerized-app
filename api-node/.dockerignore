@@ -3,3 +3,10 @@ node_modules
 
 .env
 dist
+
+build
+.git
+*.log
+
+.vscode
+.DS_Store

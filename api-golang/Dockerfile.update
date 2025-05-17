@@ -1,5 +1,5 @@
 # Start from the official Go image
-FROM golang:1.23 AS build-base
+FROM golang:1.23-alpine AS build-base
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -18,17 +18,19 @@ FROM build-base AS dev
 ENV GIN_MODE=debug
 
 # Install air for hot reload & delve for debugging
-# RUN go install github.com/air-verse/air@latest && \
-#   go install github.com/go-delve/delve/cmd/dlv@latest
+# RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
-RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b /usr/local/bin
+RUN go install github.com/air-verse/air@latest && \
+  go install github.com/go-delve/delve/cmd/dlv@latest
+
+# RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b /usr/local/bin
 
 # Copy the source code
 COPY . .
 
 CMD ["air", "-c", ".air.toml"]
 
-FROM build-base AS build-production
+FROM build-base AS prod
 
 # create another user
 RUN useradd -u 1001 nonroot

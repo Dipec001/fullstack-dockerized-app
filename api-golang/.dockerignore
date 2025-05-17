@@ -1,3 +1,11 @@
 Makefile
 README.md
 Dockerfile*
+
+dist
+build
+.git
+*.log
+.env
+.vscode
+.DS_Store

@@ -3,7 +3,8 @@ services:
     image: client-react-vite
     build:
       context: client-react
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.update
+      target: dev
     init: true
     volumes:
       - type: bind
@@ -18,17 +19,17 @@ services:
       - frontend
     ports:
       - 3001:3001
-  client-react-nginx:
-    image: client-react-nginx
-    build:
-      context: client-react
-      dockerfile: Dockerfile.update
-    init: true
-    networks:
-      - frontend
-    ports:
-      - 80:8080
-    restart: unless-stopped
+  # client-react-nginx:
+  #   image: client-react-nginx
+  #   build:
+  #     context: client-react
+  #     dockerfile: Dockerfile.update
+  #   init: true
+  #   networks:
+  #     - frontend
+  #   ports:
+  #     - 80:8080
+  #   restart: unless-stopped
   api-node:
     image: api-node
     build:
