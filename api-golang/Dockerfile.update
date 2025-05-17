@@ -1,5 +1,5 @@
 # Start from the official Go image
-FROM golang:1.23-alpine AS build-base
+FROM golang:1.23-bullseye AS build-base
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -66,13 +66,13 @@ WORKDIR /
 ENV GIN_MODE=release
 
 # Copy the passwd file since we created and are going to use a non-root user
-COPY --from=build-production /etc/passwd /etc/passwd
+COPY --from=prod /etc/passwd /etc/passwd
 
 # Copy the healthcheck binary from the build stage
-COPY --from=build-production /app/healthcheck/healthcheck healthcheck
+COPY --from=prod /app/healthcheck/healthcheck healthcheck
 
 # Copy the built Go binary from the build stage
-COPY --from=build-production /app/api-golang /api-golang
+COPY --from=prod /app/api-golang /api-golang
 
 # Use nonroot user
 USER nonroot
