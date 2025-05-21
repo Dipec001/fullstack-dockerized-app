@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Use cache mount to speed up install of existing dependencies
-RUN --mount=type=cache,target=/usr/src/app/.npm \
+RUN --mount=type=cache,id=s/744c76ba-b674-4e64-86c9-5656f7d335d9-/usr/src/app/.npm,target=/usr/src/app/.npm \
   npm set cache /usr/src/app/.npm && \
   npm install
 
