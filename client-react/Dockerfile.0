@@ -1,0 +1,16 @@
+FROM node:19.4-bullseye AS build
+
+# Specify working directory other than /
+WORKDIR /usr/src/app
+
+# Copy only files required to install
+# dependencies (better layer caching)
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3001
+
+CMD ["npm", "run", "dev"]

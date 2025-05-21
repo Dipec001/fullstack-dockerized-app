@@ -1,5 +1,5 @@
 # Starting with a base image for Node.js
-FROM node:19.6-bullseye-slim
+FROM node:19.6-bullseye-slim AS build-base
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -8,7 +8,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+  npm set cache /usr/src/app/.npm && \
+  npm install -g nodemon && \
+  npm install
+
+# dev stage
+FROM build-base AS dev
 
 # Copy the rest of the app code
 COPY . .
@@ -16,5 +22,29 @@ COPY . .
 # Expose the port
 EXPOSE 3000
 
-# Run the app (or dev command)
-CMD ["npm", "run", "dev"]
+# Start the application with nodemon
+CMD ["nodemon", "--watch", "/usr/src/app", "src/index.js"]
+
+FROM build-base AS prod
+
+# Set NODE_ENV
+ENV NODE_ENV=production
+
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+  npm set cache /usr/src/app/.npm && \
+  npm ci --omit=dev
+
+
+USER node
+
+# Copy the healthcheck script
+COPY --chown=node:node ./healthcheck/ .
+
+# Copy remaining source code AFTER installing dependencies. 
+# Again, copy only the necessary files
+COPY --chown=node:node ./src/ .
+
+# Expose the port
+EXPOSE 3000
+
+CMD ["node", "index.js"]

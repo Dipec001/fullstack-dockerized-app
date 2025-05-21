@@ -3,7 +3,7 @@ services:
     image: client-react-vite
     build:
       context: client-react
-      dockerfile: Dockerfile.update
+      dockerfile: Dockerfile
       target: dev
     init: true
     volumes:
@@ -23,7 +23,7 @@ services:
   #   image: client-react-nginx
   #   build:
   #     context: client-react
-  #     dockerfile: Dockerfile.update
+  #     dockerfile: Dockerfile
   #   init: true
   #   networks:
   #     - frontend
@@ -34,7 +34,7 @@ services:
     image: api-node
     build:
       context: api-node
-      dockerfile: Dockerfile.update
+      dockerfile: Dockerfile
       target: dev
     init: true
     volumes:
@@ -57,7 +57,7 @@ services:
     image: api-golang
     build:
       context: api-golang
-      dockerfile: Dockerfile.update
+      dockerfile: Dockerfile
       target: dev
     init: true
     volumes:
