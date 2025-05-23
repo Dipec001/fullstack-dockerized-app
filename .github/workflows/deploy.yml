@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main  # Runs only on pushes to the main branch
+      - railway  # Runs only on pushes to the main branch
 
 jobs:
   deploy:
