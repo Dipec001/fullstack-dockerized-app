@@ -1,0 +1,6 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilepath = "/api-node/Dockerfile"
+
+[deploy]
+healthcheckPath = "/ping"

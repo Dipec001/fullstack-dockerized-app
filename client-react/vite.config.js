@@ -26,7 +26,6 @@ export default defineConfig({
         secure: false,
       },
     },
-    allowedHosts: "frontend-production-c503.up.railway.app",
     watch: {
       usePolling: true,
     }

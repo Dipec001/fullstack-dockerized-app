@@ -1,0 +1,6 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilepath = "/api-golang/Dockerfile"
+
+[deploy]
+healthcheckPath = "/ping"

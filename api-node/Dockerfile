@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN --mount=type=cache,id=s/1e65626d-b927-4f2b-894e-594f92b8b02f-/usr/src/app/.npm,target=/usr/src/app/.npm \
+RUN --mount=type=cache,id=s/c7626b9b-2662-4aad-bb9e-87bd3e74f21e-/usr/src/app/.npm,target=/usr/src/app/.npm \
   npm set cache /usr/src/app/.npm && \
   npm install -g nodemon && \
   npm install
@@ -30,7 +30,7 @@ FROM build-base AS prod
 # Set NODE_ENV
 ENV NODE_ENV=production
 
-RUN --mount=type=cache,id=s/1e65626d-b927-4f2b-894e-594f92b8b02f-/usr/src/app/.npm,target=/usr/src/app/.npm \
+RUN --mount=type=cache,id=s/c7626b9b-2662-4aad-bb9e-87bd3e74f21e-/usr/src/app/.npm,target=/usr/src/app/.npm \
   npm set cache /usr/src/app/.npm && \
   npm ci --omit=dev
 

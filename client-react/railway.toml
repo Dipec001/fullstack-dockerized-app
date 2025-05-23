@@ -1,0 +1,6 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilepath = "/client-react/Dockerfile"
+
+[deploy]
+healthcheckPath = "/ping"

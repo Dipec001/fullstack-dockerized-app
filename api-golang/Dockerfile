@@ -9,7 +9,7 @@ COPY go.mod go.sum ./
 
 # Install dependencies (will be cached if unchanged)
 # with the manual cache flag, only the changed or added dependencies will be reinstalled
-RUN --mount=type=cache,id=s/4759dc50-6756-4eac-83d0-79cf36fa15cf-/root/.cache/go-build,target=/go/pkg/mod \
+RUN --mount=type=cache,id=s/57a5ae10-58bc-4435-a178-5c211c184cd5-/root/.cache/go-build,target=/go/pkg/mod \
  go mod download
 
 FROM build-base AS dev
@@ -47,7 +47,7 @@ RUN go build \
 
 # Build the Go application
 # caches the Go build artifacts to speed up incremental builds
-RUN --mount=type=cache,id=s/4759dc50-6756-4eac-83d0-79cf36fa15cf-/root/.cache/go-build,target=/root/.cache/go-build \
+RUN --mount=type=cache,id=s/57a5ae10-58bc-4435-a178-5c211c184cd5-/root/.cache/go-build,target=/root/.cache/go-build \
     go build \
     -ldflags="-linkmode external -extldflags -static" \
     -tags netgo \
